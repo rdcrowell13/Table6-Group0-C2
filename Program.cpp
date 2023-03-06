@@ -22,9 +22,19 @@ void Goal(bool a){
 
 //input
 string party(string inp){
+    Friend* f = new Friend();
+    float n = -1.0513;
+    char tochange;
     while(true){
+        if(f->conversation(false, inp) == (int)n){
+            break;
+        }
+        tochange = inp[f->i];
+        f->handshake(tochange, (bool)f->apporach(2));
 
     }
+    delete f;
+    return inp;
 }
 string fun(string inp){
 
