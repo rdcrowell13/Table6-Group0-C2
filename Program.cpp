@@ -2,10 +2,13 @@
 #include <string>
 #include <exception>
 #include <math.h>
+#include "somestuff.h"
 
 using namespace std;
 
-string goalString = "Congratulations you win!!!";
+
+
+string extra = 0;
 
 //final string
 void Goal(bool a){
@@ -18,10 +21,12 @@ void Goal(bool a){
 
 
 //input
-string a(string inp){
+string party(string inp){
+    while(true){
 
+    }
 }
-string b(string inp){
+string fun(string inp){
 
 }
 
@@ -38,11 +43,13 @@ bool validate(string s){
 
 
 
-int main(){
+int main(int argc, char** argv){
     cout << "Goal is to print 'Congratulations you win!!!'" << endl;
     string input;
     cin >> input;
     
 
+
+    
 
 }
