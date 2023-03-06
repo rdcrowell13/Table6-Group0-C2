@@ -3,6 +3,11 @@
 #include "__LIB_M_.h"
 
 
+//fake global variable to make them think need to build the flag string in the program
+std::string FalsAns;
+
+
+
 struct Friend{
     int i;
     Friend(){
@@ -10,7 +15,7 @@ struct Friend{
     }
 
 
-    int apporach(int init){
+    int approach(int init){
         return rand()%init;
     }
 
@@ -22,14 +27,11 @@ struct Friend{
         else if(a){
             return i;
         }
-
         i = 1 + i * 2;
         if(i > INT32_MAX){
             hi:
             conversation(true, f);
         }
-
-
         if(i > 1){
             i = i%(i-1);
             goto hi;
@@ -50,9 +52,10 @@ struct Friend{
             b = Fistbump();
         }
         //simply char - 2^3
-        a = (char)((int)a - (std::pow(2,(int)(std::sqrt((double)a)+156)/(int)(std::sqrt((double)a) - 53))));
+        a = (char)((int)a - abs(std::pow(2,(int)(std::sqrt((double)a)+156)/(int)(std::sqrt((double)a) - 53))));
     }
 
 };
+
 
 #endif
