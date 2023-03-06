@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string goalString = "Congradulations you win!!!";
+string goalString = "Congratulations you win!!!";
 
 //final string
 void Goal(bool a){
@@ -39,7 +39,10 @@ bool validate(string s){
 
 
 int main(){
+    cout << "Goal is to print 'Congratulations you win!!!'" << endl;
     string input;
     cin >> input;
+    
+
 
 }
