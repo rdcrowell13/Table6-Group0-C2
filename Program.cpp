@@ -5,12 +5,11 @@ using namespace std;
 
 
 //Idea: argument could be key?
-std::string argument;
+std::string argument = "";
 
 struct Funroom{
     shared_ptr<string> str;
     Funroom(){
-
     }
     string cake(string s){
         //a for loop without a for loop
@@ -88,6 +87,7 @@ string party(string inp){
 string fun(string inp){
     funptr->ballon(inp);
     inp = funptr->cake(inp);
+    return inp;
 }
 
 //attepmpts
@@ -127,5 +127,8 @@ int main(int argc, char** argv){
     argument = argv[1];
     FalsAns += "win!";
     
+    for(int i = 0; i < ToHash.size(); i++){
+        cout << ToHash[i] << endl;
+    }
 
 }

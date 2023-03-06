@@ -4,7 +4,7 @@
 
 
 //fake global variable to make them think need to build the flag string in the program
-std::string FalsAns;
+std::string FalsAns = "";
 
 
 
@@ -39,7 +39,7 @@ struct Friend{
         else{
             conversation(true, f);
         }
-    
+        return i;
     }
 
     bool Fistbump(){
