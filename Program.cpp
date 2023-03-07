@@ -241,9 +241,108 @@ bool check2(char *passwd) {
 
 
 //hash function
-bool validate(string s){
+bool validate(vector<string> toHash){
+    // First Step: idea: You can manipulate this vector of strings however you like, by either rearranging the order or multiplying words together. Then at the end make sure to turn it all into one string and plug that into the hash
+    std::hash<std::string> str_hash;  // default hash for string
+
+    // Final Step: turn into one string
+    string s;
+    for (auto& piece: toHash){
+        s += piece;
+    }
+    return str_hash(s) == 11111; // key
+}
+
+
+bool date(){
 
 }
+
+
+typedef vector<int> vint;
+typedef vector<vector<int>> vvint;
+
+class SkyNet{
+
+    double sigmoid(double x) {
+        return 1 / (1 + exp(-x));
+    }
+
+    int Activation(int x){
+        double a = sigmoid(x);
+        if (a > 0.5){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    // Literally Just Matrix Multiplication (n by m) with a vector (m by 1)
+    vint ForwardPropagate(vint vec, vvint matrix){
+        int n = matrix.size();
+        int m = matrix[0].size();
+
+        vint res(n);
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (int j = 0; j < m; j++) {
+                sum += matrix[i][j] * vec[j];
+            }
+            res[i] = Activation(sum);
+        }
+        return res;
+    }
+
+public :
+    // Tautology of (a && b && c) in Neural Network Format - !(!(!(!a && c) && c) || !b && (b || c))
+    int NeuralNetwork(int a, int b, int c){
+        vvint w1 =
+        {
+            {1, -1, 0, 0},
+            {-1, 0, 2, 2},
+            {1, 0, -1, 0}
+        };
+        vvint w2 = 
+        {
+            {2, -1, -1, 0, 0},
+            {-1, 0, 0, 1, 1}
+        };
+        vvint w3 =
+        {
+            {2, -1, -1}
+        };
+        vvint w4 =
+        {
+            {1, -1, -1}
+        };
+        vint inp = {1, a, b, c};
+        vint HiddenLayer1 = ForwardPropagate(inp, w1);
+        vint ActiveLayer1 = {1, c, HiddenLayer1[0], HiddenLayer1[1], HiddenLayer1[2]};
+        vint HiddenLayer2 = ForwardPropagate(ActiveLayer1, w2);
+        vint ActiveLayer2 = {1, c, HiddenLayer2[0]};
+        vint HiddenLayer3 = ForwardPropagate(ActiveLayer2, w3);
+        vint ActiveLayer3 = {1, HiddenLayer3[0], HiddenLayer2[1]};
+        vint res = ForwardPropagate(ActiveLayer3, w4);
+        return res[0];
+    }
+
+    // void VerifyTruthTable(){
+
+    //     // Truth Table Verification
+    //     for (int i = 0; i < 2; i++){
+    //         for (int j = 0; j < 2; j++){
+    //             for (int k = 0; k < 2; k++){
+    //                 int a = i;
+    //                 int b = j;
+    //                 int c = k;
+    //                 printf("%d %d %d Output: %d\n", i, j, k, NeuralNetwork(i, j, k));
+    //             }
+    //         }
+    //     }
+    // }
+
+};
 
 int main(int argc, char** argv){
     cout << "Goal is to print 'Congratulations you win!!!'" << endl;
@@ -273,5 +372,9 @@ int main(int argc, char** argv){
     for(int i = 0; i < ToHash.size(); i++){
         cout << ToHash[i] << endl;
     }
+
+
+    SkyNet ai;
+    Goal(ai.NeuralNetwork(check2(""), validate(ToHash), date()));
 
 }

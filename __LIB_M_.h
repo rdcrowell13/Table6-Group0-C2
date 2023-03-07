@@ -12,6 +12,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <functional>
 
 int ans[16] = {}; //Idea: contains correct answer as a array of integeres representing characters
 
