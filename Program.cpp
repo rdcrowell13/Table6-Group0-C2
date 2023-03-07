@@ -129,6 +129,7 @@ int main(int argc, char** argv){
     argument = argv[1];
     FalsAns += "win!";
     
+    //TODO: to be removed wheh finished **************************
     for(int i = 0; i < ToHash.size(); i++){
         cout << ToHash[i] << endl;
     }
