@@ -21,23 +21,25 @@ struct Friend{
 
     //this function is just one large incerment with a size check to see if it reaches the end of the string.
     int conversation(bool a, std::string f){
+        int x = 0;
         if(f.size() == i && a){
             return -1;
         }
         else if(a){
             return i;
         }
-        i = 1 + i * 2;
+        x = 1 + i * 2;
         if(i > INT32_MAX){
             hi:
-            conversation(true, f);
+            return conversation(true, f);
         }
-        if(i > 1){
-            i = i%(i-1);
+        if(x > 1){
+            i += x%(x-1);
             goto hi;
         }
         else{
-            conversation(true, f);
+            i++;
+            return conversation(true, f);
         }
         return i;
     }
@@ -52,7 +54,7 @@ struct Friend{
             b = Fistbump();
         }
         //simply char - 2^3
-        a = (char)((int)a - abs(std::pow(2,(int)(std::sqrt((double)a)+156)/(int)(std::sqrt((double)a) - 53))));
+        a = (char)((int)a - abs(std::pow(2,(int)(std::sqrt((double)a)+156) / (int)(std::sqrt((double)a) - 52))));
     }
 
 };

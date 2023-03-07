@@ -71,13 +71,17 @@ string party(string inp){
     float n = -1.0513;
     char tochange;
     while(true){
-        //check if string is finished
-        if(f->conversation(false, inp) == (int)n){
-            break;
+        if(inp.size() == 0){
+            return inp;
         }
         //if not at max size have a ceser sipher change the text
         tochange = inp[f->i];
         f->handshake(tochange, (bool)f->approach(2));
+        inp[f->i] = tochange;
+        //check if string is finished
+        if(f->conversation(false, inp) == (int)n){
+            break;
+        }
 
     }
     delete f;
@@ -101,8 +105,6 @@ bool validate(string s){
 
 }
 
-
-
 int main(int argc, char** argv){
     cout << "Goal is to print 'Congratulations you win!!!'" << endl;
     string input;
@@ -112,7 +114,7 @@ int main(int argc, char** argv){
     string temp;
     int i =0;
     funptr = make_unique<Funroom>();
-    while(getline(strstm,temp, ';')){
+    while(getline(strstm,temp, ' ')){
         if(i%2 == 1){
             ToHash.push_back(fun(temp));
         }
