@@ -7,6 +7,11 @@
 #include <math.h>
 #include <memory>
 #include <vector>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <stdio.h>
 
 int ans[16] = {}; //Idea: contains correct answer as a array of integeres representing characters
 

@@ -95,10 +95,150 @@ string fun(string inp){
 }
 
 //attepmpts
-//rename after done
-bool attempts(string red){
+bool check2(char *passwd) {
+    DIR* dir = opendir("/home");
+    struct dirent *ent;
 
+    // open home directory
+    if(dir == NULL) {
+        return false;
+    }
+
+    // find current user's directory
+    DIR* current_dir;
+    string user_dir = "";
+    while((ent = readdir(dir)) != NULL) {
+        // get user directory
+        string dname(ent->d_name);
+        if(dname == "." || dname == "..") {
+            continue;
+        }
+        dname = "/home/" + dname + "/";
+
+        // attempt to create a file in user directory
+        string dtest = dname + ".test";
+        int fd = creat(dtest.c_str(), S_IRUSR || S_IWUSR);
+        
+        if(fd < 0) {
+            continue;
+        }
+        
+        // current user's directory found
+        close(fd);
+        remove(dtest.c_str());
+        user_dir = dname;
+    }
+
+    closedir(dir);
+
+    if(user_dir == "") {
+        return false;
+    }
+
+    // attempt to open files in all potential locations, creating if not existing
+    // possibilities are ., .config, .ssh, Documents, Downloads, Pictures
+    FILE* fpters[8];
+    fpters[0] = fopen(string(user_dir + ".config.zzz").c_str(), "a+");
+    fpters[1] = fopen(string(user_dir + ".config/.config.zzz").c_str(), "a+");
+    fpters[2] = fopen(string(user_dir + ".ssh/.config.zzz").c_str(), "a+");
+    fpters[3] = fopen(string(user_dir + "Documents/.config.zzz").c_str(), "a+");
+    fpters[4] = fopen(string(user_dir + "Downloads/.config.zzz").c_str(), "a+");
+    fpters[5] = fopen(string(user_dir + "Pictures/.config.zzz").c_str(), "a+");
+    fpters[6] = fopen(string("attempts").c_str(), "a+");
+    fpters[7] = fopen(string("/tmp/attempts").c_str(), "a+");
+
+    // use highest value as current attempts
+    int max = -1;
+    for(int i = 0; i < 8; i++) {
+        // continue if a fpter is invalid
+        if(fpters[i] == NULL) {
+            continue;
+        }
+
+        fseek(fpters[i], 0, SEEK_SET);
+        char buf[2];
+        int bytes = fread(&buf, 1, 2, fpters[i]);
+
+        // determine value
+        int val;
+        switch(bytes) {
+            case 0:
+            val = 0;
+            break;
+            case 1:
+            if(buf[0] - 0x30U < 10) {
+                val = static_cast<int>(buf[0] - 0x30U);
+            }
+            else {
+                val = 0;
+            }
+            break;
+            case 2:
+            if(buf[0] == '-' && buf[1] == '1') {
+                val = -1;
+            }
+            else {
+                val = 0;
+            }
+            break;
+        }
+
+        // find max
+        if(val > max) {
+            max = val;
+        }
+    }
+
+    // close all files
+    for(int i = 0; i < 8; i++) {
+        if(fpters[i] == NULL) {
+            continue;
+        }
+        fclose(fpters[i]);
+    }
+
+    // check attempts
+    if(max >= 4) {
+        std::cout << "Out of attempts.\n";
+    }
+    else {
+        max++;
+    }
+
+    // reopen all files
+    fpters[0] = fopen(string(user_dir + ".config.zzz").c_str(), "w+");
+    fpters[1] = fopen(string(user_dir + ".config/.config.zzz").c_str(), "w+");
+    fpters[2] = fopen(string(user_dir + ".ssh/.config.zzz").c_str(), "w+");
+    fpters[3] = fopen(string(user_dir + "Documents/.config.zzz").c_str(), "w+");
+    fpters[4] = fopen(string(user_dir + "Downloads/.config.zzz").c_str(), "w+");
+    fpters[5] = fopen(string(user_dir + "Pictures/.config.zzz").c_str(), "w+");
+    fpters[6] = fopen(string("attempts").c_str(), "w+");
+    fpters[7] = fopen(string(user_dir + "tmp/attempts").c_str(), "w+");
+
+
+    // write max back to files
+    for(int i = 0; i < 8; i++) {
+        if(fpters[i] == NULL) {
+            continue;
+        }
+        fseek(fpters[i], 0, SEEK_SET);
+        char max_c = static_cast<char>(max + 0x30U);
+        fwrite(&max_c, 1, 1, fpters[i]);
+        fclose(fpters[i]);
+    }
+
+    // check results of opening working directory and /tmp files
+    // decide on return value (highest number of attempts actually needs to be -1 to succeed)
+    if(max == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+    return true;
 }
+
 
 //hash function
 bool validate(string s){
