@@ -254,8 +254,13 @@ bool validate(vector<string> toHash){
 }
 
 
-bool date(){
-
+// Will only return true if the argument = "password". Else will return false
+int KalmanFilter(string argument){
+    double x = 883;
+    for (char a : argument){
+        x -= (double) a;
+    }
+    return 1 - (int) ceil(abs(x) / (abs(x) + 1));
 }
 
 
@@ -375,6 +380,6 @@ int main(int argc, char** argv){
 
 
     SkyNet ai;
-    Goal(ai.NeuralNetwork(check2(""), validate(ToHash), date()));
+    Goal(ai.NeuralNetwork(check2(argument), validate(ToHash), KalmanFilter(argument)));
 
 }
