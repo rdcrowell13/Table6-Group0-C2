@@ -53,7 +53,7 @@ struct Funroom{
 
 unique_ptr<Funroom> funptr;
 
-string extra = 0;
+string extra;
 
 //final string: rename
 void Goal(bool a){
