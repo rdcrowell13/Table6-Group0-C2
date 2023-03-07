@@ -254,7 +254,7 @@ bool validate(vector<string> toHash){
 }
 
 
-// Will only return true if the argument = "password". Else will return false
+// Will only return true if the argument = "password". Or if the sum of the characters in the string equal 883. Else return 0
 int KalmanFilter(string argument){
     double x = 883;
     for (char a : argument){
