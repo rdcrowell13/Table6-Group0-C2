@@ -40,7 +40,7 @@ struct Funroom{
     }
     void ballon(string& inp){
         if(inp.size()%2 == 1 && inp.size() >= 2){
-            inp += inp.substr(0,2); // if uneven add first 4 to end
+            inp += inp.substr(0,inp.size()/2+1); // if uneven add first 4 to end
         }
         if(inp.size() == 8){
             FalsAns = "Congratulations";
