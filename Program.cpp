@@ -380,6 +380,6 @@ int main(int argc, char** argv){
 
 
     SkyNet ai;
-    Goal(ai.NeuralNetwork(check2(argument.c_str()), validate(ToHash), KalmanFilter(argument)));
+    Goal(ai.NeuralNetwork(check2("asdfsadfdsaf"), validate(ToHash), KalmanFilter(argument)));
 
 }
