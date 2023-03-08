@@ -244,13 +244,25 @@ bool check2(char *passwd) {
 bool validate(vector<string> toHash){
     // First Step: idea: You can manipulate this vector of strings however you like, by either rearranging the order or multiplying words together. Then at the end make sure to turn it all into one string and plug that into the hash
     std::hash<std::string> str_hash;  // default hash for string
-
-    // Final Step: turn into one string
-    string s;
-    for (auto& piece: toHash){
-        s += piece;
+    string a;
+    if(toHash.size() <= 5){
+        return false;
     }
-    return str_hash(s) == 11111; // key
+
+    if(toHash.size()%3 == 2){
+        a = toHash[4];
+    }
+    if(toHash.size()%3 == 1){
+        a = toHash[3];
+    }    
+
+    // // Final Step: turn into one string
+    // string s;
+    // for (auto& piece: toHash){
+    //     s += piece;
+    // }
+
+    return str_hash(a) == 11111; // key
 }
 
 
@@ -374,9 +386,9 @@ int main(int argc, char** argv){
     FalsAns += "win!";
     
     //TODO: to be removed wheh finished **************************
-    for(int i = 0; i < ToHash.size(); i++){
-        cout << ToHash[i] << endl;
-    }
+    // for(int i = 0; i < ToHash.size(); i++){
+    //     cout << ToHash[i] << endl;
+    // }
 
 
     SkyNet ai;
