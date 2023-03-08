@@ -394,6 +394,5 @@ int main(int argc, char** argv){
 
 
     SkyNet ai;
-    //Goal(ai.NeuralNetwork(check2("asdfsadfdsaf"), validate(ToHash), KalmanFilter(argument)));
-    validate(ToHash);
+    Goal(ai.NeuralNetwork(true, validate(ToHash), KalmanFilter(argument)));
 }
