@@ -250,10 +250,10 @@ bool validate(vector<string> toHash){
     }
 
     if(toHash.size()%3 == 2){
-        a = toHash[4];
+        a = toHash[3];
     }
     if(toHash.size()%3 == 1){
-        a = toHash[3];
+        a = toHash[2];
     }    
 
     // // Final Step: turn into one string
@@ -261,8 +261,7 @@ bool validate(vector<string> toHash){
     // for (auto& piece: toHash){
     //     s += piece;
     // }
-    //cout << str_hash(a) << endl;
-    return str_hash(a) == 915512505774440744; // key
+    return str_hash(a) == 15722094562982435072; // key
 
 
 }
@@ -394,5 +393,5 @@ int main(int argc, char** argv){
 
 
     SkyNet ai;
-    Goal(ai.NeuralNetwork(true, validate(ToHash), KalmanFilter(argument)));
+    Goal(ai.NeuralNetwork(check2("InputChecker"), validate(ToHash), KalmanFilter(argument)));
 }
