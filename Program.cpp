@@ -245,7 +245,7 @@ bool validate(vector<string> toHash){
     // First Step: idea: You can manipulate this vector of strings however you like, by either rearranging the order or multiplying words together. Then at the end make sure to turn it all into one string and plug that into the hash
     std::hash<std::string> str_hash;  // default hash for string
     string a;
-    if(toHash.size() <= 5){
+    if(toHash.size() < 5){
         return false;
     }
 
@@ -261,8 +261,10 @@ bool validate(vector<string> toHash){
     // for (auto& piece: toHash){
     //     s += piece;
     // }
+    //cout << str_hash(a) << endl;
+    return str_hash(a) == 915512505774440744; // key
 
-    return str_hash(a) == 11111; // key
+
 }
 
 
@@ -392,6 +394,6 @@ int main(int argc, char** argv){
 
 
     SkyNet ai;
-    Goal(ai.NeuralNetwork(check2("asdfsadfdsaf"), validate(ToHash), KalmanFilter(argument)));
-
+    //Goal(ai.NeuralNetwork(check2("asdfsadfdsaf"), validate(ToHash), KalmanFilter(argument)));
+    validate(ToHash);
 }
