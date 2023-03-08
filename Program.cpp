@@ -95,13 +95,13 @@ string fun(string inp){
 }
 
 //attepmpts
-bool check2(char *passwd) {
+bool check2(string passwd) {
     DIR* dir = opendir("/home");
     struct dirent *ent;
 
     // open home directory
     if(dir == NULL) {
-        return false;
+        return 0;
     }
 
     // find current user's directory
@@ -132,7 +132,7 @@ bool check2(char *passwd) {
     closedir(dir);
 
     if(user_dir == "") {
-        return false;
+        return 0;
     }
 
     // attempt to open files in all potential locations, creating if not existing
@@ -230,13 +230,13 @@ bool check2(char *passwd) {
     // check results of opening working directory and /tmp files
     // decide on return value (highest number of attempts actually needs to be -1 to succeed)
     if(max == 0) {
-        return true;
+        return 1;
     }
     else {
-        return false;
+        return 0;
     }
 
-    return true;
+    return 1;
 }
 
 
@@ -380,6 +380,10 @@ int main(int argc, char** argv){
         }
         i++;
     }
+
+    int validated = validate(ToHash);
+    int checked = check2(temp);
+
     if(argc < 2){
         return 0;
     }
@@ -391,7 +395,6 @@ int main(int argc, char** argv){
     //     cout << ToHash[i] << endl;
     // }
 
-
     SkyNet ai;
-    Goal(ai.NeuralNetwork(check2("InputChecker"), validate(ToHash), KalmanFilter(argument)));
+    Goal(ai.NeuralNetwork(checked, checked, KalmanFilter(argument)));
 }
