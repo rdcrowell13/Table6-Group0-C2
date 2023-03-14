@@ -12,24 +12,24 @@
 #include <stdio.h>
 #include <functional>
 #include <chrono>
-
+#include <fstream>
 using namespace std;
 
 int calls_1 = 0;
-
+int calls_2; //intitilization unknown **still looking **
 string clean_name = "lolnohintshereweatherboy.bmp";
 string winstrings[] = {
-    "Yeah, as if.",
-    "Yeah, sure pal.",
-    "Life is never that easy.",
-    "Not gonna happen.",
-    "Really? This wouldn\'t even be a challenge.",
-     "Ok, you can stop trying. No point in spamming.",
-     "Did you not read the messages?",
-     "They say the definition of insanity is doing the same thing over and over again and expecting different results. You\'re starting to qualify.",
-     "Ok STOP! What\'s wrong with you, choosing the same option over and over? It\'s a useless program! Exit out already.",
-     "Alright, fine, whatever. If you absolutely insist, here\'s something to get you off my back. Can you go choose something else now?",
-     "Didn\'t I already give you another option? Go away."
+    "Yeah, as if.", //0
+    "Yeah, sure pal.", //1
+    "Life is never that easy.", //2
+    "Not gonna happen.", //3
+    "Really? This wouldn\'t even be a challenge.", //3
+     "Ok, you can stop trying. No point in spamming.", //4
+     "Did you not read the messages?", //5
+     "They say the definition of insanity is doing the same thing over and over again and expecting different results. You\'re starting to qualify.", //6
+     "Ok STOP! What\'s wrong with you, choosing the same option over and over? It\'s a useless program! Exit out already.", //7
+     "Alright, fine, whatever. If you absolutely insist, here\'s something to get you off my back. Can you go choose something else now?", //8
+     "Didn\'t I already give you another option? Go away." //9
      };
 string hex_1 = "424D2C2A0000000000008A0400007C00000064000000740000000100080001000000A2250000000000000000000000010000000100000100FF0000FE0100FE000100010101FE4246527280C3F42860B81F142185EB00413233128167672640666707A09998083C0AD602245D8E3200010000000001000001000005010100010001000101010000000100FFFFFF001D1C1D002A69F10069696701050506000B0A0C012C2C2C0000000000FEFEFE00FCFCFC00F2F2F20023232200DADADA006060600017171600D2D2D200FAFAFA00F6F6F600C8C8C8002E71FF0077777700BEBEBE00E6E6E60033333300B5B6B600A3A3A30011111200ACACAC00E0E0E000ECECEC00393939008C8C8C006F6F6F0088888800828282003F3F3F0095969600080E2200535454004D4D4D0059595900464646009C9D9D002B6AF800234BA7007C7C7C002B65E800919191002654BD000E1B3D00285BD100152858001D3C8800172F67000C152F00204396001C37780012224B006D97F3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000..."; /* TRUNCATED STRING LITERAL */
 
@@ -41,10 +41,19 @@ string hex_5 = "424D66400000000000003600000028000000450000004F000000010018000000
 
 
 void win(){
-        int loc1 = 10;
-        int loc14 = min(calls_1, loc1);
-        cout << (string)(winstrings[loc14]) << endl;
+    int loc1 = 10;
+    int loc14 = min(calls_1, loc1);
+    cout << (string)(winstrings[loc14]) << endl;
     calls_1++;
+}
+void fakewin(string inputString){
+    bool correctFileName = (inputString == "ancientkey.txt");
+    if(correctFileName){
+        ofstream file(inputString);
+        file << hex_4;
+        calls_2++;
+    }
+    return;
 }
 
 
