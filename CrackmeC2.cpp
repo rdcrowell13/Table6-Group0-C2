@@ -85,7 +85,7 @@ void tryname(string& Input){
 
     printhelper(Input);
 
-    fakewin(s7);
+    fakewin(Input);
 
 
 }
