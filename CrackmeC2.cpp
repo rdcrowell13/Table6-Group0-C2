@@ -40,6 +40,7 @@ string hex_5 = "424D66400000000000003600000028000000450000004F000000010018000000
 
 
 
+
 void win(){
     int loc1 = 10;
     int loc14 = min(calls_1, loc1);
@@ -52,10 +53,21 @@ void fakewin(string inputString){
         ofstream file(inputString);
         file << hex_4;
         calls_2++;
+        file.close();
     }
     return;
 }
 
+void select(string Inputstring){
+    if(Inputstring == "dashdot.txt"){
+        ofstream file(Inputstring);
+        file << hex_5;
+        calls_2++;
+        file.close();
+    }
+
+
+}
 
 int main(){
     bool b1 = false;
