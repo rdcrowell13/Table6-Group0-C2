@@ -65,9 +65,40 @@ void select(string Inputstring){
         calls_2++;
         file.close();
     }
+}
+
+void getfile(string Input){
+
+}
+
+void tryname(string& Input){
+ 
+    getfile(Input);
+
+    stripfile(Input);
+
+    select(Input);
+
+    functionalfunction(Input);
+
+    getImage(Input);
+
+    printhelper(Input);
+
+    fakewin(s7);
 
 
 }
+
+void imfile(){
+    string input;
+    cout << "Give me a name, and you may get a reward." << endl;
+    cin >> input;
+
+    tryname(input);
+
+}
+
 
 int main(){
     bool b1 = false;
