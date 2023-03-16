@@ -71,6 +71,19 @@ void getfile(string Input){
 
 }
 
+void stripfile(string input){
+
+}
+void functionalfunction(string input){
+
+}
+void getImage(string input){
+
+}
+void printhelper(string input){
+
+}
+
 void tryname(string& Input){
  
     getfile(Input);
