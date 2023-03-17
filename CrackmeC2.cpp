@@ -67,23 +67,24 @@ void select(string Inputstring){
     }
 }
 
-void getfile(string& Input){
+
+/** This function does nothing of value*/
+void getfile(string Input){
     ifstream infile(Input);
     if(infile.fail() == '\0'){
 
         string fromfile;
         infile >> fromfile;
+        fromfile.append("ff"); //Data0010408d has this info stored as f f and the end character. This may complete a hex in one of the files for a hint?
         //possible other append?
 
         if(fromfile.capacity() < 101){
             if(fromfile.capacity() < 51){
                 string Sub = fromfile.substr(0, fromfile.size()); //first item is 0 second item is unclear but has to do with the size. No math done of RCX which came from result of size()
                 fromfile.append(Sub); //still unclear the order
-                Input = fromfile; // program does not show this but it is implied in the binary. Could still be wrong but I am 80% sure this is what happens
             }
             else{
                 fromfile = fromfile.substr(0, 49); //EDX = 0, ECX = 0x31   
-                Input = fromfile; // program does not show this but it is implied in the binary. Could still be wrong but I am 80% sure this is what happens
             }
         }
         //only issue with this function is that in trynmae the input gets deleted and then realocated again. It also does not fit the passby reference pattern. May be this function serves no purpose 
@@ -147,5 +148,8 @@ int main(){
         cout << "\nMain Menu:" << endl;
         cout << "\tOption1: choose me to win instanty!" << endl;
 
+        string temp = "ss";
+
+        tryname(temp);
     }
 }
