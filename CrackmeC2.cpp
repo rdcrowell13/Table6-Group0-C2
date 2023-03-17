@@ -67,8 +67,27 @@ void select(string Inputstring){
     }
 }
 
-void getfile(string Input){
+void getfile(string& Input){
+    ifstream infile(Input);
+    if(infile.fail() == '\0'){
 
+        string fromfile;
+        infile >> fromfile;
+        //possible other append?
+
+        if(fromfile.capacity() < 101){
+            if(fromfile.capacity() < 51){
+                string Sub = fromfile.substr(0, fromfile.size()); //first item is 0 second item is unclear but has to do with the size. No math done of RCX which came from result of size()
+                fromfile.append(Sub); //still unclear the order
+                Input = fromfile; // program does not show this but it is implied in the binary. Could still be wrong but I am 80% sure this is what happens
+            }
+            else{
+                fromfile = fromfile.substr(0, 49); //EDX = 0, ECX = 0x31   
+                Input = fromfile; // program does not show this but it is implied in the binary. Could still be wrong but I am 80% sure this is what happens
+            }
+        }
+        //only issue with this function is that in trynmae the input gets deleted and then realocated again. It also does not fit the passby reference pattern. May be this function serves no purpose 
+    }
 }
 
 void stripfile(string input){
@@ -85,21 +104,26 @@ void printhelper(string input){
 }
 
 void tryname(string& Input){
- 
-    getfile(Input);
+    string incoming = Input;
+    getfile(incoming);
 
+    incoming = Input;
     stripfile(Input);
 
+    incoming = Input;
     select(Input);
 
+    incoming = Input;   
     functionalfunction(Input);
 
+    incoming = Input;
     getImage(Input);
 
+    incoming = Input;
     printhelper(Input);
 
+    incoming = Input;
     fakewin(Input);
-
 
 }
 
