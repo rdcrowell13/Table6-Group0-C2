@@ -174,22 +174,21 @@ void imfile()
 
 int main()
 {
-    bool bVar1;
-    bool bVar2;
+    bool FlwCtrlCheck; // truth seems to depend on the flow of operations
+    bool TmDifCheck;   // truth seems to depend on time difference between chrono::now() calls and partially on flow of operations at the bottom
     type tVar3;
     type tVar4;
     undefined4 extraout_var;
     undefined4 extraout_var_00;
     undefined4 extraout_var_01;
     undefined4 extraout_var_02;
-    long in_FS_OFFSET;
     int looper;
     undefined8 local_30;
     undefined8 local_28;
     undefined8 time3;
     undefined8 local_18;
 
-    bVar1 = false;
+    FlwCtrlCheck = false;
     auto time1 = std::chrono::_V2::system_clock::now();
     looper = 1;
     while (0 < looper)
@@ -249,34 +248,38 @@ int main()
             cout << "Invalid selection, quitting." << endl;
         }
 
+        // The below is a puzzle of its own in order to set allow=1 to allow calling 'tryguess()'
         // Incomplete
         if (allow == '\0')
         {
-            '' auto time3 = std::chrono::_V2::system_clock::now();
+            auto time3 = std::chrono::_V2::system_clock::now();
             tVar3 = std::chrono::operator-((time_point *)&time3, (time_point *)&time2);
             local_18 = CONCAT44(extraout_var, tVar3);
             tVar4 = std::chrono::
                 duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l>>, long, std::ratio<1l, 1000 000000l>>((duration *)&local_18);
 
+            // Next two lines replaces the above?
             auto time3 = std::chrono::_V2::system_clock::now();
             duration_cast<milliseconds>(time3 - time2);
 
             local_30 = CONCAT44(extraout_var_00, tVar4);
             time3 = CONCAT44(time3._4_4_, 100);
             std::chrono::duration<long, std::ratio<1l, 1000l>>::duration<int, void>((duration<long, std::ratio<1l, 1000l>> *)&local_18, (int *)&time3);
-            bVar2 = std::chrono::operator<((duration *)&local_30, (duration *)&local_18);
-            if ((!bVar2) || (bVar1))
+            TmDifCheck = std::chrono::operator<((duration *)&local_30, (duration *)&local_18);
+
+            // Time difference check 1
+            if ((!TmDifCheck) || (FlwCtrlCheck))
             {
-                if (bVar1)
+                if (FlwCtrlCheck)
                 {
-                    if (bVar2)
+                    if (TmDifCheck)
                     {
                         std::operator<<((basic_ostream *)std::cout,
                                         "\nAren\'t you supposed to avoid integer overflows?\n");
                     }
-                    else if (!bVar2)
+                    else if (!TmDifCheck)
                     {
-                        bVar1 = false;
+                        FlwCtrlCheck = false;
                         time1 = std::chrono::_V2::system_clock::now();
                     }
                 }
@@ -288,8 +291,10 @@ int main()
             else
             {
                 time1 = std::chrono::_V2::system_clock::now();
-                bVar1 = true;
+                FlwCtrlCheck = true;
             }
+
+            // Time difference check 2
             time3 = std::chrono::_V2::system_clock::now();
             tVar3 = std::chrono::operator-((time_point *)&time3, (time_point *)&time1);
             local_18 = CONCAT44(extraout_var_01, tVar3);
@@ -298,16 +303,17 @@ int main()
             local_28 = CONCAT44(extraout_var_02, tVar4);
             time3 = CONCAT44(time3._4_4_, 5);
             std::chrono::duration<long, std::ratio<1l, 1l>>::duration<int, void>((duration<long, std::ratio<1l, 1l>> *)&local_18, (int *)&time3);
-            bVar2 = std::chrono::operator>((duration *)&local_28, (duration *)&local_18);
-            if ((bVar2) && (bVar1))
+            TmDifCheck = std::chrono::operator>((duration *)&local_28, (duration *)&local_18);
+            if ((TmDifCheck) && (FlwCtrlCheck))
             {
-                bVar2 = true;
+                TmDifCheck = true;
             }
             else
             {
-                bVar2 = false;
+                TmDifCheck = false;
             }
-            if (bVar2)
+            // Unlocking this if statement unlocks 'tryguess()'
+            if (TmDifCheck)
             {
                 std::basic_ios<char, std::char_traits<char>>::clear(0x12c170);
                 allow = '\x01';
