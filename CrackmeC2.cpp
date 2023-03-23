@@ -74,30 +74,8 @@ void win()
     cout << (string)(winstrings[loc14]) << endl;
     calls_1++;
 }
-void fakewin(string inputString)
-{
-    bool correctFileName = (inputString == "ancientkey.txt");
-    if (correctFileName)
-    {
-        ofstream file(inputString);
-        file << hex_4;
-        calls_2++;
-        file.close();
-    }
-    return;
-}
 
-void select(string Inputstring)
-{
-    if (Inputstring == "dashdot.txt")
-    {
-        ofstream file(Inputstring);
-        file << hex_5;
-        calls_2++;
-        file.close();
-    }
-}
-
+//-- Start of tryname suite
 /** This function does nothing of value*/
 void getfile(string Input)
 {
@@ -126,40 +104,87 @@ void getfile(string Input)
     }
 }
 
-void stripfile(string input)
+// Writes global variable hex_2 into a file "vroom.txt" if you input that
+void stripfile(string filename)
 {
+    if (filename == "vroom.txt")
+    {
+        ofstream file(filename);
+        file << hex_2; // running the actual executable should give the full, untruncated string
+        calls_2++;
+    }
+    return;
 }
+
+void select(string Inputstring)
+{
+    if (Inputstring == "dashdot.txt")
+    {
+        ofstream file(Inputstring);
+        file << hex_5;
+        calls_2++;
+        file.close();
+    }
+}
+
 void functionalfunction(string input)
 {
-}
-void getImage(string input)
-{
-}
-void printhelper(string input)
-{
+    if (input == "sanguinepiscene.txt")
+    {
+        ofstream file(input);
+        file << hex_3;
+        calls_2++;
+    }
+    return;
 }
 
-void tryname(string &Input)
+// 95% sure this is correct, cross checked with Ghidra after compilation
+void getImage(string filename) // seems to do nothing
 {
-    string incoming = Input;
-    getfile(incoming);
+    string name = filename.substr(0, filename.find_last_of('.'));
+    name += ".png";
+    ifstream file(name);
+    string FileContent;
+    file >> FileContent;
+    size_t a = FileContent.find_first_not_of('0');
+    return;
+}
 
-    incoming = Input;
+void printhelper(string filename)
+
+{
+
+    if (filename == "pizzapizza.txt")
+    {
+        ofstream file(input);
+        file << hex_1;
+        calls_2++;
+    }
+    return;
+}
+
+void fakewin(string inputString)
+{
+    bool correctFileName = (inputString == "ancientkey.txt");
+    if (correctFileName)
+    {
+        ofstream file(inputString);
+        file << hex_4;
+        calls_2++;
+        file.close();
+    }
+    return;
+}
+
+// Verified - matched Ghidra's signature
+void tryname(string Input)
+{
+    getfile(Input); // doesn't do anything, might reveal hint when given the right filename?
     stripfile(Input);
-
-    incoming = Input;
     select(Input);
-
-    incoming = Input;
     functionalfunction(Input);
-
-    incoming = Input;
     getImage(Input);
-
-    incoming = Input;
     printhelper(Input);
-
-    incoming = Input;
     fakewin(Input);
 }
 
@@ -198,6 +223,7 @@ void unstegno(void)
     }
     calls_4++; //! Increment global variable. Not really relevant since all it does is unlock a printing 'Option 5 unlocked' but no actual code is affected, I think. I only checked calls_4 in unstegno, not other functions for it
     // The below seems to parse a text file with a pattern.
+    // Will attempt to read 1024*8 bytes. Every 8 characters acts as one-pseudo byte which is ascii_check. So there are 1024 pseduo bytes. Terminates if it reads a pseudo-byte of '\t'
     string builder; // perhaps the key? It gets printed out in the end
     for (int i = 0; i < 1024; i++)
     { // 2^5 = 1024
