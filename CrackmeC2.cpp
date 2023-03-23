@@ -172,6 +172,53 @@ void imfile()
     tryname(input);
 }
 
+// Correctness Verified
+auto stegosaurus_helepr_1(string filename)
+{
+    auto fh = fopen(filename.c_str(), "rb");
+    return fh;
+}
+
+// Correctness Verified
+void unstegno(void)
+{
+    unsigned char fOutput;
+    FILE *fp;
+    //   basic_string filename [8];
+    //   basic_string builder [10]; this is a temporary string variable
+
+    string filename;
+    cout << "Enter answer" << endl;
+    cin >> filename;
+    fp = stegosaurus_helepr_1(filename); // opens filename
+    // Seems to be some sort of character waster where you want to ignore the first 54 characters of a file, prepping for the relevant file read in the builder
+    for (int i = 0; i < 54; i++)
+    {
+        fread(&fOutput, 1, 1, fp); // fOutput - buffer, 1 - bytes read of file, 1 - size of buffer, fp - file pointer
+    }
+    calls_4++; //! Increment global variable. Not really relevant since all it does is unlock a printing 'Option 5 unlocked' but no actual code is affected, I think. I only checked calls_4 in unstegno, not other functions for it
+    // The below seems to parse a text file with a pattern.
+    string builder; // perhaps the key? It gets printed out in the end
+    for (int i = 0; i < 1024; i++)
+    { // 2^5 = 1024
+        char ascii_check = '\0';
+        // encodes a binary string of up to 8 bits, so 1 byte. The decimal value of the byte is stored into ascii_check. Note, we are evaluating character numerical value, not literally '1' and '0's
+        for (int j = 0; j < 8; j++)
+        {
+            fread(&fOutput, 1, 1, fp);
+            fOutput &= 1;                // fOutput will always be either a 1 or a 0
+            ascii_check += fOutput << j; // adds either 0, or 2^j, depending on fOutput=1,0. Basically evaluating the decimal value of a binary string
+        }
+        if (ascii_check == '\t') // when ascii_check =  2^0 + 0 + 0 + 2^3 + 0 + 0 + 0 + 0, or the binary string is 00001001 will this be true
+        {
+            cout << builder;
+            return;
+        }
+        builder += ascii_check;
+    }
+    cout << builder;
+}
+
 int main()
 {
     bool FlwCtrlCheck; // truth seems to depend on the flow of operations
