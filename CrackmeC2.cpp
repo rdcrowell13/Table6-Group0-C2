@@ -245,6 +245,28 @@ void unstegno(void)
     cout << builder;
 }
 
+void hextofile(string a, string b)
+{
+}
+
+// Verified with Ghidra, 99% sure it matches
+void de0x()
+{
+    string filename;
+    cout << "File name: ";
+    cin >> filename;
+    string hex_result = gethex(filename);
+    filename = filename.substr(0, filename.find_last_of('.'));
+    filename += ".bmp";
+
+    if (!hex_result.empty())
+    {
+        hextofile(filename, hex_result);
+    }
+    calls_3++;
+    return;
+}
+
 int main()
 {
     bool FlwCtrlCheck; // truth seems to depend on the flow of operations
