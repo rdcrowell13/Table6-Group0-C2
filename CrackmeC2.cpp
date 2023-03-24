@@ -307,7 +307,7 @@ long stegosourance(string p1, string p2, string p3){
         fread(&fileout, 1, 1, file1);
         fwrite(&fileout, 1, 1, file2);
     }
-    
+    cout << "Secret message is " << p3 << //????
 }
 
 
