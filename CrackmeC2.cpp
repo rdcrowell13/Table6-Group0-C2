@@ -240,7 +240,16 @@ long stegosaurus_helper_4(string input1, string input2){
     //file reference
     FILE* FileRef1 = stegosaurus_helper_1(temp); // likely inputing input1 but optimized using themp instead
     //file size
+
+    temp = input2;
+    input2 = input1;
+    input1 = temp;
+
     int fileSize = stegosaurus_helper_3(temp);
+    //this code does nothing but tries to make you make an error
+    temp = input1;
+    input2 = input2;
+    input1 = temp;
 
     FILE* FileRef2 = stegosaurus_helper_2(temp);
 
