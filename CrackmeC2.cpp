@@ -13,10 +13,15 @@
 #include <functional>
 #include <chrono>
 #include <fstream>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <bitset>
+#include <cstddef>
 using namespace std;
 
 // I believe these globals are empty initialized and compiler default them to 0
-int calls_1;
+int calls_1 =0 ;
 int calls_2;
 int calls_3;
 int calls_4;
@@ -104,6 +109,8 @@ void getfile(string Input)
     }
 }
 
+
+
 // Writes global variable hex_2 into a file "vroom.txt" if you input that
 void stripfile(string filename)
 {
@@ -156,7 +163,7 @@ void printhelper(string filename)
 
     if (filename == "pizzapizza.txt")
     {
-        ofstream file(input);
+        ofstream file(filename);
         file << hex_1;
         calls_2++;
     }
@@ -198,11 +205,67 @@ void imfile()
 }
 
 // Correctness Verified
-auto stegosaurus_helepr_1(string filename)
+FILE* stegosaurus_helper_1(string filename)
 {
-    auto fh = fopen(filename.c_str(), "rb");
+    FILE* fh = fopen(filename.c_str(), "rb");
     return fh;
 }
+
+FILE* stegosaurus_helper_2(string input){
+    // does not show this in code but is revield in sego4 and make sence since fopen automaticly assigned RAX so no special return is detected
+    return fopen(input.c_str(), "wb"); 
+}
+
+/**
+ * returns the the unsigned int max size if the file is pressent and loaded. 
+*/
+off_t stegosaurus_helper_3(string fileName){
+
+    struct stat file; 
+
+    int fileID = stat(fileName.c_str(), &file);
+
+    if(fileID != 0){
+        file.st_size = UINT32_MAX;
+    }
+    return file.st_size;
+}
+
+long stegosaurus_helper_4(string input1, string input2){
+    sizeof(string);
+    //not sure on this but it looks like they flip the strings around here
+    string temp = input2;
+    input2 = input1;
+    input1 = temp;
+    //file reference
+    FILE* FileRef1 = stegosaurus_helper_1(temp); // likely inputing input1 but optimized using themp instead
+    //file size
+    int fileSize = stegosaurus_helper_3(temp);
+
+    FILE* FileRef2 = stegosaurus_helper_2(temp);
+
+    //read bytes from one file and move to other file
+    byte readFile;
+    for(int i =0; i < 54; i++){
+        fread(&readFile,1 ,1, FileRef1);
+        fwrite(&readFile, 1, 1, FileRef2);
+    }
+    //Block cypher
+    byte readFile2;
+    for(int i =0; i < fileSize - 54; i++){
+        fread(&readFile2, 1,1, FileRef1);
+        readFile = (readFile2) & static_cast<byte>(0xfe);
+        fwrite(&readFile, 1, 1, FileRef2);
+    }
+    //does nothing
+    for(int i = 0; i < 0; i++){ //??
+        fread(&readFile,1 ,1, FileRef1);
+        fwrite(&readFile, 1, 1, FileRef2);
+    }
+    return 0;
+
+}
+
 
 // Correctness Verified
 void unstegno(void)
@@ -391,7 +454,7 @@ int main()
 
             // Time difference check 2
             time3 = std::chrono::_V2::system_clock::now();
-            tVar3 = std::chrono::operator-((time_point *)&time3, (time_point *)&time1);
+            tVar3 = chrono::operator-((time_point *)&time3, (time_point *)&time1);
             local_18 = CONCAT44(extraout_var_01, tVar3);
             tVar4 = std::chrono::
                 duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l>>, long, std::ratio<1l, 1000 000000l>>((duration *)&local_18);
