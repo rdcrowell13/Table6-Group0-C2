@@ -275,6 +275,41 @@ long stegosaurus_helper_4(string input1, string input2){
 
 }
 
+long stegosourance(string p1, string p2, string p3){
+    string& par1 = p1;
+    string& par2 = p2;
+    string& par3 = p3;
+    
+    p3 = par1;
+    string temp = p2; //Guessing but only thing that makes sence (used memory address to assign)
+    p2 = p3;
+    p1 = temp; 
+
+    FILE* file1 = stegosaurus_helper_1(temp);
+
+    p3 = par1;
+    temp = p2;
+    p2 = p3;
+    p1 = temp;
+
+    int FileLength = stegosaurus_helper_3(temp);
+
+    p3 = par2;
+    temp = p2;
+    p2 = p3;
+    p1 = temp;
+
+    FILE* file2 = stegosaurus_helper_2(temp);
+
+
+    byte fileout;
+    for(int i = 0; i <54; i++){
+        fread(&fileout, 1, 1, file1);
+        fwrite(&fileout, 1, 1, file2);
+    }
+    
+}
+
 
 // Correctness Verified
 void unstegno(void)
