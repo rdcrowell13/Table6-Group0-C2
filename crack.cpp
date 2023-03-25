@@ -23,23 +23,20 @@ void generateAllCaps(string s, int i, vector<string> &list)
 
 int main()
 {
-    long Hash = -0x2dd708b93d82e611;
+    size_t Hash = 15143625630316042735;
     string morse = "MLFKQVMLOQXYIBMLIVDLK";
 
     hash<std::string> hasher;
-    for (int i = 0; i < morse.size(); i++)
+    vector<string> list;
+    generateAllCaps(morse, 0, list);
+    for (string &word : list)
     {
-        string msg = morse.substr(0, i);
-        vector<string> list;
-        generateAllCaps(msg, 0, list);
-        for (string &word : list)
+        // cout << word << endl;
+        size_t TheHash = hasher(word);
+        if (TheHash == Hash)
         {
-            long TheHash = hasher(word);
-            if (TheHash == Hash)
-            {
-                cout << "You have found the key and won. Enjoy your prize:\n";
-                cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
-            }
+            cout << "You have found the key and won. Enjoy your prize:\n";
+            cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
         }
     }
 }
