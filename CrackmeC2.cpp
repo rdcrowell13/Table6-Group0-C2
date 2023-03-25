@@ -284,21 +284,21 @@ long stegosourance(string p1, string p2, string p3){
     string temp = p2; //Guessing but only thing that makes sence (used memory address to assign)
     p2 = p3;
     p1 = temp; 
-
+    // p2 for first input
     FILE* file1 = stegosaurus_helper_1(temp);
 
     p3 = par1;
     temp = p2;
     p2 = p3;
     p1 = temp;
-
+    //p3 for second input
     int FileLength = stegosaurus_helper_3(temp);
 
     p3 = par2;
     temp = p2;
     p2 = p3;
     p1 = temp;
-
+    //p2 for second input?
     FILE* file2 = stegosaurus_helper_2(temp);
 
 
@@ -354,6 +354,11 @@ void unstegno(void)
 
 void hextofile(string a, string b)
 {
+}
+
+
+string getHexString(string input){
+    
 }
 
 // Verified with Ghidra, 99% sure it matches
@@ -495,7 +500,7 @@ int main()
                 time1 = std::chrono::_V2::system_clock::now();
                 FlwCtrlCheck = true;
             }
-
+            chrono::_V2::steady_clock::duration(int, ration<11,10001>)
             // Time difference check 2
             time3 = std::chrono::_V2::system_clock::now();
             tVar3 = chrono::operator-((time_point *)&time3, (time_point *)&time1);
