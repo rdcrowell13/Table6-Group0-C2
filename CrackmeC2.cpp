@@ -501,7 +501,7 @@ int main()
             check_start = std::chrono::system_clock::now();
             time_diff = check_start - loop_start;
             
-            auto test_duration2 = std::chrono::duration<long, std::milli>(5);
+            auto test_duration2 = std::chrono::duration<long, ratio<1l,1l>>(5);
             TmDifCheck = time_diff > test_duration2;
 
             if ((TmDifCheck) && (FlwCtrlCheck))
