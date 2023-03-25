@@ -62,9 +62,11 @@ int printAllKLengthRec(char set[], string prefix, int n, int k)
 
 int main()
 {
-    //MLFKQVMLOQXYIBMLIVDLK
-    long Hash = -0x2dd708b93d82e611;
+    size_t Hash = 15143625630316042735;
     string morse2 = "MLFKQVMLOQXYIBMLIVDLK";
+
+    hash<std::string> hasher;
+    vector<string> list;
 
     for(int f = 0; f < morse2.size() - 7; f++){
         string morse = morse2.substr(f, 7);
@@ -89,7 +91,6 @@ int main()
             }
         }
     }
-
 
 
 
