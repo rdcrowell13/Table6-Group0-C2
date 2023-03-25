@@ -63,7 +63,7 @@ int printAllKLengthRec(char set[], string prefix, int n, int k)
 int main()
 {
     size_t Hash = 15143625630316042735;
-    string morse = "MLFKQVMLOQXYIBMLIVDLK";
+    string morse = "PizzaPizza";
 
     hash<std::string> hasher;
     vector<string> list;
@@ -72,7 +72,7 @@ int main()
         //string morse = morse2.substr(f, 7);
 
         
-        hash<std::string> hasher;
+        //hash<std::string> hasher;
         for (int i = 0; i < morse.size(); i++)
         {
             string msg = morse.substr(0, i);
@@ -100,7 +100,7 @@ int main()
     srand(time(NULL));
     char alph[]= "abcdefghijklmnopqrstuvwxyz""0123456789""ABCDEFGHIJKLMNOPQURTUVWXYZ";
     string testHash = "";
-    hash<std::string> hasher;
+    //hash<std::string> hasher;
     // for(long i =0; i < pow(62,7); i++)
     // {
     //     testHash = "";
@@ -117,7 +117,7 @@ int main()
     //         return 0;
     //     }
     // }
-    printAllKLengthRec(alph, "", 62, 7);
+    //printAllKLengthRec(alph, "", 62, 7);
 
     cout << "done! " << endl;
 }
