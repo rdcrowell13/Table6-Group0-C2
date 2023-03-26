@@ -22,7 +22,7 @@ void generateAllCaps(string s, int i, vector<string> &list)
     generateAllCaps(s, i + 1, list);
 }
 
-
+int count =0;
 int printAllKLengthRec(char set[], string prefix, int n, int k)
 {
      
@@ -33,6 +33,11 @@ int printAllKLengthRec(char set[], string prefix, int n, int k)
         //cout << (prefix) << endl;
         hash<std::string> hasher;
         long TheHash = hasher(prefix);
+        if(count == 1000){
+            cout << prefix << endl;
+            count =0;
+        }
+        count++;
         if(TheHash == -0x2dd708b93d82e611){
             cout << (prefix) << endl;
             return 1;
@@ -46,10 +51,10 @@ int printAllKLengthRec(char set[], string prefix, int n, int k)
     for (int i = 0; i < n; i++)
     {
         string newPrefix;
-         
+        
         // Next character of input added
         newPrefix = prefix + set[i];
-         
+        
         // k is decreased, because
         // we have added a new character
         if(printAllKLengthRec(set, newPrefix, n, k - 1) == 1){
@@ -62,8 +67,8 @@ int printAllKLengthRec(char set[], string prefix, int n, int k)
 
 int main()
 {
-    size_t Hash = 15143625630316042735;
-    string morse = "PizzaPizza";
+    long Hash = 0xd228f746c27d19ef;
+    string morse = "LittleCaesarspizzapizza";
 
     hash<std::string> hasher;
     vector<string> list;
@@ -78,8 +83,14 @@ int main()
             string msg = morse.substr(0, i);
             vector<string> list;
             generateAllCaps(msg, 0, list);
+            
+
             for (string &word : list)
             {
+
+                if(word == "lolNoHintsHereWeatherboy"){
+                    cout << "test" << endl;
+                }
                 //cout << word << endl;
                 long TheHash = hasher(word);
                 if (TheHash == Hash)
@@ -92,6 +103,17 @@ int main()
         }
     //}
 
+
+        if(morse == "lolNoHintsHereWeatherboy"){
+            cout << "test" << endl;
+        }
+        //cout << word << endl;
+        long TheHash = hasher(morse);
+        if (TheHash == Hash)
+        {
+            cout << "You have found the key and won. Enjoy your prize:\n";
+            cout << "tinyurl.com/" + morse << endl; // may be a hint; rickroll link maybe (3acwfenx)
+        }
 
 
 

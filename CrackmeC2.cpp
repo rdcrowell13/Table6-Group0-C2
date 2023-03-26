@@ -74,9 +74,9 @@ void tryguess()
 
 void win()
 {
-    int loc1 = 10;
-    int loc14 = min(calls_1, loc1);
-    cout << (string)(winstrings[loc14]) << endl;
+    int limit = 10;
+    int stringIndex = min(calls_1, limit);
+    cout << winstrings[stringIndex] << endl;
     calls_1++;
 }
 
@@ -158,7 +158,6 @@ void getImage(string filename) // seems to do nothing
 }
 
 void printhelper(string filename)
-
 {
 
     if (filename == "pizzapizza.txt")
