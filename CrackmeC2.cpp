@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <functional>
 #include <chrono>
+#include <ratio>
 #include <fstream>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -306,7 +307,7 @@ long stegosourance(string p1, string p2, string p3){
         fread(&fileout, 1, 1, file1);
         fwrite(&fileout, 1, 1, file2);
     }
-    cout << "Secret message is " << p3 << //????
+    cout << "Secret message is " << p3;// << //????
 }
 
 
@@ -321,7 +322,7 @@ void unstegno(void)
     string filename;
     cout << "Enter answer" << endl;
     cin >> filename;
-    fp = stegosaurus_helepr_1(filename); // opens filename
+    fp = stegosaurus_helper_1(filename); // opens filename
     // Seems to be some sort of character waster where you want to ignore the first 54 characters of a file, prepping for the relevant file read in the builder
     for (int i = 0; i < 54; i++)
     {
@@ -360,6 +361,10 @@ string getHexString(string input){
     
 }
 
+string gethex(string input) {
+    return "";
+}
+
 // Verified with Ghidra, 99% sure it matches
 void de0x()
 {
@@ -382,24 +387,26 @@ int main()
 {
     bool FlwCtrlCheck; // truth seems to depend on the flow of operations
     bool TmDifCheck;   // truth seems to depend on time difference between chrono::now() calls and partially on flow of operations at the bottom
-    type tVar3;
-    type tVar4;
-    undefined4 extraout_var;
-    undefined4 extraout_var_00;
-    undefined4 extraout_var_01;
-    undefined4 extraout_var_02;
+    //std::chrono::duration<long, std::milli> time_diff;
+    std::chrono::time_point<std::chrono::system_clock> program_start;
+    std::chrono::time_point<std::chrono::system_clock> loop_start;
+    //type tVar4;
+    //undefined4 extraout_var;
+    //undefined4 extraout_var_00;
+    //undefined4 extraout_var_01;
+    //undefined4 extraout_var_02;
     int looper;
-    undefined8 local_30;
-    undefined8 local_28;
-    undefined8 time3;
-    undefined8 local_18;
+    //undefined8 local_30;
+    //undefined8 local_28;
+    //undefined8 time3;
+    //undefined8 local_18;
 
     FlwCtrlCheck = false;
-    auto time1 = std::chrono::_V2::system_clock::now();
+    program_start = std::chrono::system_clock::now();
     looper = 1;
     while (0 < looper)
     {
-        auto time2 = std::chrono::_V2::system_clock::now();
+        loop_start = std::chrono::system_clock::now();
         // -- Print Menu
         cout << "\nMain Menu:" << endl;
         cout << "\tOption 1: choose me to win instantly!" << endl;
@@ -458,20 +465,11 @@ int main()
         // Incomplete
         if (allow == '\0')
         {
-            auto time3 = std::chrono::_V2::system_clock::now();
-            tVar3 = std::chrono::operator-((time_point *)&time3, (time_point *)&time2);
-            local_18 = CONCAT44(extraout_var, tVar3);
-            tVar4 = std::chrono::
-                duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l>>, long, std::ratio<1l, 1000 000000l>>((duration *)&local_18);
+            std::chrono::time_point<std::chrono::system_clock> check_start = std::chrono::system_clock::now();
+            auto time_diff = check_start - loop_start;
 
-            // Next two lines replaces the above?
-            auto time3 = std::chrono::_V2::system_clock::now();
-            duration_cast<milliseconds>(time3 - time2);
-
-            local_30 = CONCAT44(extraout_var_00, tVar4);
-            time3 = CONCAT44(time3._4_4_, 100);
-            std::chrono::duration<long, std::ratio<1l, 1000l>>::duration<int, void>((duration<long, std::ratio<1l, 1000l>> *)&local_18, (int *)&time3);
-            TmDifCheck = std::chrono::operator<((duration *)&local_30, (duration *)&local_18);
+            auto test_duration = std::chrono::duration<long, std::milli>(100);
+            TmDifCheck = time_diff < test_duration;
 
             // Time difference check 1
             if ((!TmDifCheck) || (FlwCtrlCheck))
@@ -480,36 +478,31 @@ int main()
                 {
                     if (TmDifCheck)
                     {
-                        std::operator<<((basic_ostream *)std::cout,
-                                        "\nAren\'t you supposed to avoid integer overflows?\n");
+                        std::cout << "\nAren\'t you supposed to avoid integer overflows?\n";
                     }
                     else if (!TmDifCheck)
                     {
                         FlwCtrlCheck = false;
-                        time1 = std::chrono::_V2::system_clock::now();
+                        program_start = std::chrono::system_clock::now();
                     }
                 }
                 else
                 {
-                    time1 = std::chrono::_V2::system_clock::now();
+                    program_start = std::chrono::system_clock::now();
                 }
             }
             else
             {
-                time1 = std::chrono::_V2::system_clock::now();
+                program_start = std::chrono::system_clock::now();
                 FlwCtrlCheck = true;
             }
-            chrono::_V2::steady_clock::duration(int, ration<11,10001>)
             // Time difference check 2
-            time3 = std::chrono::_V2::system_clock::now();
-            tVar3 = chrono::operator-((time_point *)&time3, (time_point *)&time1);
-            local_18 = CONCAT44(extraout_var_01, tVar3);
-            tVar4 = std::chrono::
-                duration_cast<std::chrono::duration<long, std::ratio<1l, 1000l>>, long, std::ratio<1l, 1000 000000l>>((duration *)&local_18);
-            local_28 = CONCAT44(extraout_var_02, tVar4);
-            time3 = CONCAT44(time3._4_4_, 5);
-            std::chrono::duration<long, std::ratio<1l, 1l>>::duration<int, void>((duration<long, std::ratio<1l, 1l>> *)&local_18, (int *)&time3);
-            TmDifCheck = std::chrono::operator>((duration *)&local_28, (duration *)&local_18);
+            check_start = std::chrono::system_clock::now();
+            time_diff = check_start - loop_start;
+            
+            auto test_duration2 = std::chrono::duration<long, ratio<1l,1l>>(5);
+            TmDifCheck = time_diff > test_duration2;
+
             if ((TmDifCheck) && (FlwCtrlCheck))
             {
                 TmDifCheck = true;
@@ -521,10 +514,9 @@ int main()
             // Unlocking this if statement unlocks 'tryguess()'
             if (TmDifCheck)
             {
-                std::basic_ios<char, std::char_traits<char>>::clear(0x12c170);
+                //std::basic_ios<char, std::char_traits<char>>::clear(0x12c170);
                 allow = '\x01';
-                std::operator<<((basic_ostream *)std::cout,
-                                "\nOverflow corrected and secret function unlocked. Don\'t do it again.\n");
+                std::cout << "\nOverflow corrected and secret function unlocked. Don\'t do it again.\n";
             }
         }
     }
