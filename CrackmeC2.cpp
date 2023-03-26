@@ -356,13 +356,28 @@ void hextofile(string a, string b)
 {
 }
 
-
-string getHexString(string input){
-    
+string gethex(string input){
+    // local variables
+    char local[8];
+    string filename = input;
+    string hex_result;
+    //open file
+    ifstream file(filename);
+    //if success
+    if(!file.fail()){
+        file >> local;
+        hex_result = local;
+    }
+    //else fail
+    else{
+        cout << "bad name" << endl;
+    }
+    //return
+    return hex_result;
 }
 
-string gethex(string input) {
-    return "";
+
+string getHexString(string input){
 }
 
 // Verified with Ghidra, 99% sure it matches
