@@ -354,6 +354,46 @@ void unstegno(void)
 
 void hextofile(string a, string b)
 {
+    //   bool bVar1;
+//   basic_istream *pbVar2;
+//   long lVar3;
+//   long in_FS_OFFSET;
+//   basic_string local_3b8 [32];
+//   ios_base aiStack_338 [272];
+//   basic_string local_228 [129];
+//   char local_23;
+//   char cStack_22;
+//   undefined local_21;
+//   long local_20;
+  
+//   local_20 = *(long *)(in_FS_OFFSET + 0x28);
+//   std::operator|(4,0x10);
+//   std::basic_ofstream<char,std::char_traits<char>>::basic_ofstream(local_228,param_1);
+//   local_21 = 0;
+//   std::operator|(0x10,8);
+//                     /* try { // try from 00103df6 to 00103dfa has its CatchHandler @ 00103ed7 */
+//   std::__cxx11::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>::
+//   basic_stringstream(local_3b8,param_2);
+//   std::ios_base::flags(aiStack_338,8);
+//   while( true ) {
+//     bVar1 = std::basic_ios::operator.cast.to.bool((basic_ios *)aiStack_338);
+//     if (!bVar1) break;
+//                     /* try { // try from 00103e26 to 00103e8b has its CatchHandler @ 00103ebf */
+//     pbVar2 = std::operator>>((basic_istream *)local_3b8,&local_23);
+//     std::operator>>(pbVar2,&cStack_22);
+//     lVar3 = strtol(&local_23,(char **)0x0,0x10);
+//     std::operator<<((basic_ostream *)local_228,(uchar)lVar3);
+//   }
+//   std::__cxx11::basic_stringstream<char,std::char_traits<char>,std::allocator<char>>::
+//   ~basic_stringstream((basic_stringstream<char,std::char_traits<char>,std::allocator<char>> *)
+//                       local_3b8);
+//   std::basic_ofstream<char,std::char_traits<char>>::~basic_ofstream
+//             ((basic_ofstream<char,std::char_traits<char>> *)local_228);
+//   if (local_20 != *(long *)(in_FS_OFFSET + 0x28)) {
+//                     /* WARNING: Subroutine does not return */
+//     __stack_chk_fail();
+//   }
+//   return;
 }
 
 string gethex(string input){
@@ -378,6 +418,24 @@ string gethex(string input){
 
 
 string getHexString(string input){
+     //grab size of input
+    size_t paramsize = input.size();
+    //other local vars within ghidra
+    string RSI;
+    string local_68;
+    string local_48;
+    //if input size < 0xff
+    if(paramsize < 0xff){
+        RSI += "ff";
+        local_68 = getHexString(local_48);
+        RSI = local_48;
+    }
+
+    //basic_string((basic_string*)CONCAT44(in_register_0000003c, input));
+    input = local_68 + input;
+    //return (basic_string *)CONCAT44(in_register_0000004c, input);
+
+    return input;
 }
 
 // Verified with Ghidra, 99% sure it matches
