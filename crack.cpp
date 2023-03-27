@@ -72,54 +72,59 @@ int main()
     // string morse = morse2.substr(f, 7);
 
     // hash<std::string> hasher;
-    for (int i = 0; i < morse.size(); i++)
-    {
-        string msg = morse.substr(0, i);
-        vector<string> list;
-        generateAllCaps(msg, 0, list);
-        for (string &word : list)
-        {
-            string msg = morse.substr(0, i);
-            vector<string> list;
-            generateAllCaps(msg, 0, list);
+    // for (int i = 0; i < morse.size(); i++)
+    // {
+    //     string msg = morse.substr(0, i);
+    //     vector<string> list;
+    //     generateAllCaps(msg, 0, list);
+    //     for (string &word : list)
+    //     {
+    //         string msg = morse.substr(0, i);
+    //         vector<string> list;
+    //         generateAllCaps(msg, 0, list);
             
 
-            for (string &word : list)
-            {
+    //         for (string &word : list)
+    //         {
 
-                if(word == "lolNoHintsHereWeatherboy"){
-                    cout << "test" << endl;
-                }
-                //cout << word << endl;
-                long TheHash = hasher(word);
-                if (TheHash == Hash)
-                {
-                    cout << "You have found the key and won. Enjoy your prize:\n";
-                    cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
-                }
+    //             if(word == "lolNoHintsHereWeatherboy"){
+    //                 cout << "test" << endl;
+    //             }
+    //             //cout << word << endl;
+    //             long TheHash = hasher(word);
+    //             if (TheHash == Hash)
+    //             {
+    //                 cout << "You have found the key and won. Enjoy your prize:\n";
+    //                 cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
+    //             }
                 
-            // cout << word << endl;
-            long TheHash = hasher(word);
+    //         // cout << word << endl;
+    //         long TheHash = hasher(word);
+    //         if (TheHash == Hash)
+    //         {
+    //             cout << "You have found the key and won. Enjoy your prize:\n";
+    //             cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
+    //         }
+    //     }
+    // }
+    //}
+        string input = "";
+
+        while (input != "0"){
+
+            //cin.ignore(256, '\b');
+            getline(cin, input);
+            //cout << word << endl;
+            long TheHash = hasher(input);
+            cout << TheHash << endl << endl;
             if (TheHash == Hash)
             {
                 cout << "You have found the key and won. Enjoy your prize:\n";
-                cout << "tinyurl.com/" + word << endl; // may be a hint; rickroll link maybe (3acwfenx)
+                cout << "tinyurl.com/" + morse << endl; // may be a hint; rickroll link maybe (3acwfenx)
             }
         }
-    }
-    //}
 
-
-        if(morse == "lolNoHintsHereWeatherboy"){
-            cout << "test" << endl;
-        }
-        //cout << word << endl;
-        long TheHash = hasher(morse);
-        if (TheHash == Hash)
-        {
-            cout << "You have found the key and won. Enjoy your prize:\n";
-            cout << "tinyurl.com/" + morse << endl; // may be a hint; rickroll link maybe (3acwfenx)
-        }
+       
 
 
 

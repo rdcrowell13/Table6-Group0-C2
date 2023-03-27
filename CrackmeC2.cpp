@@ -281,7 +281,7 @@ long stegosourance(string p1, string p2, string p3){
     string& par3 = p3;
     
     p3 = par1;
-    string temp = p2; //Guessing but only thing that makes sence (used memory address to assign)
+    string temp = p2;                                           //Guessing but only thing that makes sence (used memory address to assign)
     p2 = p3;
     p1 = temp; 
     // p2 for first input
@@ -463,7 +463,7 @@ int main()
 
         // The below is a puzzle of its own in order to set allow=1 to allow calling 'tryguess()'
         // Incomplete
-        if (allow == '\0')
+        if (allow == 0)
         {
             std::chrono::time_point<std::chrono::system_clock> check_start = std::chrono::system_clock::now();
             auto time_diff = check_start - loop_start;
